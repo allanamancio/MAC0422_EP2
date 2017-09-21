@@ -1,11 +1,13 @@
 //Conterá o simulador
 #include <stdio.h>
+#include <pthread.h>
 #include "pista.h"
 #include "ciclista.h"
 #include "aux.h"
 
 pista *velodromo;
-
+int debug;
+pthread_barrier_t barreira;
 int main(int argc, char *argv[]) {
 	// argv[1] = d (tamanho da pista)
 	// argv[2] = n (número de ciclistas)
@@ -15,12 +17,18 @@ int main(int argc, char *argv[]) {
 	int tamanho_pista;
 	int numero_ciclistas;
 	int numero_voltas;
-	int debug;
 
+	//Inicializa argumentos
 	tamanho_pista = argv[1];
-	numero_ciclistas argv[2];
+	numero_ciclistas = argv[2];
 	numero_voltas = argv[3];
 	if (argc == 5) debug = argv[4];
+
+	//Inicializa barreira
+	if (pthread_barrier_init(&barreira, NULL, numero_ciclistas)) {
+		printf("ERROR(main): Barreira não foi inicializada");
+		exit(1);
+	}
 
 	cria_pista(velodromo, tamanho_pista);
 
@@ -31,4 +39,6 @@ int main(int argc, char *argv[]) {
 			cria_ciclista(i, j);
 			numero_ciclistas--;
 		}
+
+
 }

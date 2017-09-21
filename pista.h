@@ -1,3 +1,6 @@
+#ifndef __PISTA_H__
+#define __PISTA_H__
+
 //Conterá a struct pista e os métodos da pista
 
 typedef struct {
@@ -18,4 +21,6 @@ void ultrapassa(ciclista *c);
 
 //Recebe um índice da pista e retorna o número de ciclistas naquela posição
 int numero_de_ciclistas(int d);
+
+#endif
 

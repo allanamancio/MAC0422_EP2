@@ -1,3 +1,5 @@
+#include "aux.h"
+
 int mod(int a, int b) {
 	/*Returns a%b*/
 	if(b < 0)

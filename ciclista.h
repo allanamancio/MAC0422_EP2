@@ -1,3 +1,5 @@
+#ifndef __CICLISTA_H__
+#define __CICLISTA_H__
 //Conterá a struct ciclista e os métodos dos ciclistas
 
 typedef struct {
