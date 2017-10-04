@@ -19,15 +19,3 @@ double time_current() {
 	
 	return (double)(time.tv_sec - initial.tv_sec) + (double)(time.tv_nsec - initial.tv_nsec)/BILLION; // Time in seconds
 }
-
-
-void my_sleep(float time) {
-	/*Sleep implemented time in seconds with one decimal place*/
-	static struct timespec nanotime; // Time in a format to function nanosleep
-
-	// Builds the time struct to the nanosleep
-	nanotime.tv_sec = (int) time;
-	nanotime.tv_nsec = (time - nanotime.tv_sec)*BILLION;
-
-	nanosleep(&nanotime, NULL);
-}

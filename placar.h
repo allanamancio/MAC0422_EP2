@@ -1,13 +1,15 @@
 #ifndef __PLACAR_H__
 #define __PLACAR_H__
 
-typedef struct {
-	ciclista *ranking;
-	int *pontos;
-} placar;
+#include "structs.h"
+#include <stdlib.h>
 
-void atribui_pontos(*ciclista, *placar);
+extern placar *meu_placar;
 
-void ordena_placar(*placar);
+int cria_placar(int d);
+
+void atribui_pontos(ciclista *c);
+
+void ordena_placar();
 
 #endif

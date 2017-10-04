@@ -1,15 +1,13 @@
 #ifndef __PISTA_H__
 #define __PISTA_H__
 
-//Conterá a struct pista e os métodos da pista
+#include "structs.h"
+#include <stdlib.h>
 
-typedef struct {
-	ciclistas *pista[10];
-	int total_ciclistas;
-} pista;
+extern pista *velodromo;
 
-//Recebe a pista e o tamanho. Aloca e inicializa a pista.
-int cria_pista(pista *p, int d);
+//Recebe um tamanho. Inicializa a pista (matriz de ids de ciclistas global chamada velodromo) com zeros.
+int cria_pista(int d);
 
 int destroi_pista(pista *p);
 

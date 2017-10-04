@@ -10,7 +10,5 @@
 /*Return the time elapsed since its first call*/
 double time_current();
 
-/*Sleep implemented time in seconds with one decimal place*/
-void my_sleep(float time);
 
 #endif
