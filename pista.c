@@ -24,6 +24,20 @@ void pedala(ciclista *c) {
 	c->pos = mod(c->pos + 1, velodromo->tamanho);
 }
 
+void ultrapassa(ciclista *c) {
+	velodromo->circuito[c->faixa][c->pos] = 0;
+	velodromo->circuito[c->faixa + 1][mod(c->pos + 1, velodromo->tamanho)] = c->id;
+	c->pos = mod(c->pos + 1, velodromo->tamanho);
+	c->faixa++;
+}
+
+void volta_faixa(ciclista *c) {
+	velodromo->circuito[c->faixa][c->pos] = 0;
+	velodromo->circuito[c->faixa - 1][mod(c->pos + 1, velodromo->tamanho)] = c->id;
+	c->pos = mod(c->pos + 1, velodromo->tamanho);
+	c->faixa--;
+}
+
 ciclista *busca_ciclista(int id) {
 	int i;
 	for (i = 0; i < velodromo->total_ciclistas; i++)

@@ -1,12 +1,14 @@
 #ifndef __STRUCTS_H__
 #define __STRUCTS_H__
 
+#include <pthread.h>
 //Conterá a struct ciclista e os métodos dos ciclistas
 typedef struct {
 	int v; //velocidade
 	int volta;
 	int pos; //índice da pista no qual o ciclista está	
 	int faixa; //em qual faixa o ciclista está
+	int faixa_origem;
 	int pontos;
 	int id; //Deve ser diferente de 0
 	pthread_t thread_id;

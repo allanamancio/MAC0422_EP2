@@ -2,7 +2,7 @@
   CC = gcc
 
 # compiler flags:
-  CFLAGS  = -pthread
+  CFLAGS  = -pthread -Wall
 
 # the build target executable:
 

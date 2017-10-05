@@ -1,7 +1,7 @@
 #include "placar.h"
 
 int cria_placar(int d) {
-	int i, j;
+	int i;
     ciclista **ranking = (ciclista**)malloc(d*sizeof(ciclista*));
     int *pontos = (int*)malloc(d*sizeof(int));
 	if (ranking == NULL || pontos == NULL) return 0;
