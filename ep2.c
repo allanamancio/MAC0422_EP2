@@ -8,9 +8,10 @@
 
 pista *velodromo;
 placar *meu_placar;
-int intervalo_atualizacao;
+int relogio; //tempo do jogo
 int debug;
 pthread_barrier_t barreira;
+pthread_mutex_t mutex_pista;
 
 int main(int argc,  char *argv[]) {
 	// argv[1] = d (tamanho da pista)
@@ -27,10 +28,14 @@ int main(int argc,  char *argv[]) {
 	tamanho_pista = atoi(argv[1]);
 	numero_ciclistas = atoi(argv[2]);
 	numero_voltas = atoi(argv[3]);
+	relogio = 0;
 	debug = 0;
 	if (argc == 5) debug = 1;
 	meu_placar = malloc(sizeof(placar));
 	velodromo = malloc(sizeof(pista));
+
+	//Inicializa semáforo
+	pthread_mutex_init(&mutex_pista, NULL);
 
 	//Inicializa barreira
 	if (pthread_barrier_init(&barreira, NULL, numero_ciclistas)) {
@@ -38,7 +43,7 @@ int main(int argc,  char *argv[]) {
 		exit(1);
 	}
 
-	cria_pista(tamanho_pista);
+	cria_pista(tamanho_pista, numero_voltas);
 	cria_placar(numero_ciclistas);
 
 

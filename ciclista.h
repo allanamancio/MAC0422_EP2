@@ -6,6 +6,7 @@
 
 extern pista *velodromo;
 extern placar *meu_placar;
+extern int relogio;
 
 //inicializa a struct e cria a thread
 int cria_ciclista(int posicao, int faixa, int id);

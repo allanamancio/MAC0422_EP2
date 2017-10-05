@@ -1,0 +1,42 @@
+A cada 10 volta:
+1 lugar - +5 pontos
+2 lugar - +3 pontos
+3 lugar - +2 pontos
+4 lugar - +1 ponto
+
+Dar volta sobre todos: +20 pontos
+
+30km/h - 120ms
+60km/h - 60ms
+90km/h - 40ms
+
+A cada volta (a partir da segunda), sorteio de velocidade:
+
+70% 60km/h || 30% 30km/h (CASO A VOLTA ANTERIOR TENHA SIDO FEITA A 30)
+
+50% 60km/h || 50% 30km/h (CASO A VOLTA ANTERIOR TENHA SIDO FEITA A 60)
+
+Se não ultrapassar, diminui a velocidade
+
+Nas últimas 2 voltas, se alguém tiver a 90, o intervalo_granulidade tem que ser 20ms (e não 40)
+
+Nas 2 últimas voltas, 1 ciclista aleatória, respeitando as regras de ultrapassagem, etc, sorteia a velocidade 90 com 10%
+
+Cada cicilista preenche sua posição e remove sua posição
+
+---
+
+A cada múltiplo de 15 voltas, o ciclista tem 1% de quebrar -- IMPRIME ESSA INFORMAÇÃO (o identificador, posição ranking e a volta)
+MAAAASSS, se tiver só 5 ciclistas na prova, não tem quebra
+Se quebrou, queima a thread
+
+A cada volta completada - IMPRIME posições de todos os ciclistas naquela volta (sem os ciclistas daquela volta?)
+Em múltiplos de 10 voltas, ranking em ordem descrescente
+
+no final da corrida de todo mundo - IMPRIME PONTUAÇÃO FINAL e o INSTANTE DE CADA CICLISTA CHEGANDO NA LINHA DE CHEGADA
+CICLISTAS QUEBRADOS IMPRIMIE VOLTA QUE ELE QUEBROU E QUE ELE FOI QUBRADO
+
+DEBUG
+
+a cada 60ms ou 20ms (nas duas últimas voltas): IMPRIMIR A PISTA
+

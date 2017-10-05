@@ -16,6 +16,7 @@ typedef struct {
 typedef struct {
 	int **circuito;
 	int total_ciclistas;
+	int numero_voltas;
 	int tamanho;
 } pista;
 
