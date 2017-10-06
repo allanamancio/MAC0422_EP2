@@ -9,6 +9,7 @@
 
 extern pista *velodromo;
 extern placar *meu_placar;
+extern pthread_barrier_t barreira;
 extern pthread_mutex_t mutex_pista;
 extern int relogio;
 

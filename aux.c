@@ -28,3 +28,13 @@ void imprime_placar() {
 		printf("(%d, %d) ", meu_placar->ranking[i]->id, meu_placar->pontos[i]);
 	printf("\nFIM DO PLACAR\n\n");
 }
+
+void aumenta_relogio() {
+	if (velodromo->v_max != 90) relogio += 60;
+	else relogio += 20;
+
+	// Debug
+	pthread_mutex_lock(&mutex_pista);
+	imprime_pista();
+	pthread_mutex_unlock(&mutex_pista);
+}

@@ -50,20 +50,18 @@ int main(int argc,  char *argv[]) {
 	/*Cria os ciclistas nas suas posições e faixas corretas (10 faixas e tamanho_pista posições) a partir da posição e 
 	 *faixa 0.*/
  	for (i = tamanho_pista - 1; numero_ciclistas > 0; i = mod(i - 1, tamanho_pista))
-		for (j = 0; j < 10 && numero_ciclistas > 0; j++) { 
+		for (j = 0; j < 10 && numero_ciclistas > 0; j++) {
 			cria_ciclista(i, j, numero_ciclistas);
 			numero_ciclistas--;
 		}
 
-	//Calcula
+	//Espera as threads encerrarem
+	for (i = 0; i < velodromo->total_ciclistas; i++) {
+		pthread_join(meu_placar->ranking[i]->thread_id, NULL);
+	}
 
-	//Executa
-	//Barreira 0
-	//Atualiza
-	//Verifica
-
-	imprime_pista();
-	imprime_placar();
+	//Destrói barreira
+	pthread_barrier_destroy(&barreira);
 
 	return 1;
 }

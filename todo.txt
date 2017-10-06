@@ -1,1 +1,4 @@
 - Falta pontos, ranking, voltas (fora a primeira)
+- Verificar erro com 44 ciclistas
+- Verificar erros no código (quando pode dar errado)
+- Imprimir prints style

@@ -15,6 +15,7 @@ int cria_pista(int d, int voltas) {
 	velodromo->total_ciclistas = 0;
 	velodromo->numero_voltas = voltas;
 	velodromo->tamanho = d;
+	velodromo->v_max = 30;
 	return 1;
 }
 
