@@ -43,12 +43,11 @@ int main(int argc,  char *argv[]) {
 		exit(1);
 	}
 
-	cria_pista(tamanho_pista, numero_voltas);
+	cria_pista(tamanho_pista, numero_voltas, numero_ciclistas);
 	cria_placar(numero_ciclistas);
 
-
-	/*Cria os ciclistas nas suas posições e faixas corretas (10 faixas e tamanho_pista posições) a partir da posição e 
-	 *faixa 0.*/
+	/*Cria os ciclistas nas suas posições e faixas corretas (10 faixas e tamanho_pista posições) a partir da faixa 0
+	 *e posição tamanho_pista - 1.*/
  	for (i = tamanho_pista - 1; numero_ciclistas > 0; i = mod(i - 1, tamanho_pista))
 		for (j = 0; j < 10 && numero_ciclistas > 0; j++) {
 			cria_ciclista(i, j, numero_ciclistas);
@@ -60,8 +59,9 @@ int main(int argc,  char *argv[]) {
 		pthread_join(meu_placar->ranking[i]->thread_id, NULL);
 	}
 
-	//Destrói barreira
+	//Destrói barreira e semáforo
 	pthread_barrier_destroy(&barreira);
+	pthread_mutex_destroy(&mutex_pista);
 
 	return 1;
 }

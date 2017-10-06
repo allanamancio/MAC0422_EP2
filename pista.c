@@ -1,7 +1,7 @@
-//Conterá a struct pista e os métodos da pista
+//Conterá os métodos da pista
 #include "pista.h"
 
-int cria_pista(int d, int voltas) {
+int cria_pista(int d, int voltas, int ciclistas) {
 	int i, j;
     int **circuito = (int**)malloc(10*sizeof(int*));
 	if (circuito == NULL) return 0;
@@ -16,6 +16,8 @@ int cria_pista(int d, int voltas) {
 	velodromo->numero_voltas = voltas;
 	velodromo->tamanho = d;
 	velodromo->v_max = 30;
+	velodromo->total_ciclistas = ciclistas;
+	velodromo->finalizados = 0;
 	return 1;
 }
 

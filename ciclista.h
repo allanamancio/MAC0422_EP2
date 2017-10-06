@@ -14,7 +14,7 @@ extern pthread_mutex_t mutex_pista;
 extern int relogio;
 
 //inicializa a struct e cria a thread
- 
+int cria_ciclista(int posicao, int faixa, int id); 
 
 int destroi_ciclista(ciclista *c);
 
@@ -23,7 +23,6 @@ int pode_pedalar(ciclista *c);
 
 //Retorna 1 se o ciclista puder ultrapassar e 0 c.c.
 int pode_ultrapassar(ciclista *c);
-
 
 void reduz_velocidade(ciclista *c);
 
@@ -38,5 +37,4 @@ int sorteia_velocidade(ciclista *c);
 
 void *ciclista_generico(void *c);
 
-int cria_ciclista(int posicao, int faixa, int id);
 #endif

@@ -1,4 +1,4 @@
-//Conterá a struct ciclista e os métodos dos ciclistas
+//Conterá os métodos dos ciclistas
 
 #include "ciclista.h"
 
@@ -15,8 +15,9 @@ int cria_ciclista(int posicao, int faixa, int id) {
 	c->faixa_origem = faixa;
 	c->pontos = 0;
 	c->id = id;
+	pthread_mutex_lock(&mutex_pista);
 	velodromo->circuito[faixa][posicao] = id;
-	velodromo->total_ciclistas++;
+	pthread_mutex_unlock(&mutex_pista);
 	meu_placar->ranking[id - 1] = c;
 	pthread_create(&(c->thread_id), NULL, ciclista_generico, c);
 	return 1;
@@ -47,16 +48,14 @@ int pode_ultrapassar(ciclista *c) {
 	return 1;
 }
 
-
 void reduz_velocidade(ciclista *c) {
 	ciclista *c_frente;
 	c_frente = busca_ciclista(velodromo->circuito[c->faixa][mod(c->pos + 1, velodromo->tamanho)]);
-	c->v = c_frente->v;
+	if (c->v > c_frente->v) c->v = c_frente->v;
 }
 
 int consegue_voltar(ciclista *c) {
-	printf("(i,j): %d %d\n",c->faixa -1, mod(c->pos + 1, velodromo->tamanho));
-	if (velodromo->circuito[c->faixa -1][mod(c->pos + 1, velodromo->tamanho)] || !pode_pedalar(c)) return 0;
+	if (velodromo->circuito[c->faixa - 1][mod(c->pos + 1, velodromo->tamanho)]) return 0;
 	return 1;
 }
 
@@ -64,23 +63,23 @@ int consegue_voltar(ciclista *c) {
 
 void *ciclista_generico(void *c) {
 	int pedalei = 0;
-	while (cast_c->volta <= velodromo->numero_voltas) {
+	while (cast_c->volta <= velodromo->numero_voltas || velodromo->finalizados < velodromo->total_ciclistas) {
+		pthread_barrier_wait(&barreira);
 		if (cast_c->volta <= 1) {
 			pthread_mutex_lock(&mutex_pista);
-			if (cast_c->faixa_origem != cast_c->faixa && consegue_voltar(cast_c)) {
-				volta_faixa(cast_c); //Se aproxima da faixa original
-				pedalei = 1;
-			}
-			else {
-				if (velodromo->circuito[cast_c->faixa][mod(cast_c->pos + 1, velodromo->tamanho)]) {
+			if (pode_pedalar(cast_c)) {
+				if (cast_c->faixa_origem != cast_c->faixa && consegue_voltar(cast_c)) {
+					volta_faixa(cast_c); //Se aproxima da faixa original
+					pedalei = 1;
+				}
+				else if (velodromo->circuito[cast_c->faixa][mod(cast_c->pos + 1, velodromo->tamanho)]) {
 					if (pode_ultrapassar(cast_c)) {
 						ultrapassa(cast_c);
 						pedalei = 1;
-
 					}
-					else reduz_velocidade(cast_c);
+					reduz_velocidade(cast_c);
 				}
-				else if (pode_pedalar(cast_c)) {
+				else {
 					pedala(cast_c);
 					pedalei = 1;
 				}
@@ -93,11 +92,17 @@ void *ciclista_generico(void *c) {
 			pthread_mutex_lock(&mutex_pista);
 			pthread_mutex_unlock(&mutex_pista);
 		}
-		pthread_mutex_unlock(&mutex_pista);
 
 		if (pedalei) {
-			if (!cast_c->pos) {
+			if (!cast_c->pos) { // Linha de chegada
 				cast_c->volta++;
+				if (cast_c->volta > velodromo->numero_voltas) {
+					pthread_mutex_lock(&mutex_pista);
+					velodromo->finalizados++;
+					velodromo->circuito[cast_c->faixa][cast_c->pos] = 0; // Sumir do mapa
+					pthread_mutex_unlock(&mutex_pista);
+					cast_c->v = 0;
+				}
 				pthread_mutex_lock(&mutex_pista);
 				imprime_pista();
 				pthread_mutex_unlock(&mutex_pista);
@@ -109,6 +114,6 @@ void *ciclista_generico(void *c) {
 			aumenta_relogio();
 		}
 	}
-	
+
 	return NULL;
 }

@@ -9,7 +9,7 @@ extern pista *velodromo;
 extern placar *meu_placar;
 
 //Recebe um tamanho. Inicializa a pista (matriz de ids de ciclistas global chamada velodromo) com zeros.
-int cria_pista(int d, int voltas);
+int cria_pista(int d, int voltas, int ciclistas);
 
 int destroi_pista(pista *p);
 

@@ -18,6 +18,7 @@ typedef struct {
 typedef struct {
 	int **circuito;
 	int total_ciclistas;
+	int finalizados; //Ciclistas que terminaram a corrida
 	int numero_voltas;
 	int tamanho;
 	int v_max; //velocidade máxima corrente na pista
