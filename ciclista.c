@@ -14,6 +14,7 @@ int cria_ciclista(int posicao, int faixa, int id) {
 	c->faixa = faixa;
 	c->faixa_origem = faixa;
 	c->pontos = 0;
+	c->quebrado = 0;
 	c->id = id;
 	pthread_mutex_lock(&mutex_pista);
 	velodromo->circuito[faixa][posicao] = id;
