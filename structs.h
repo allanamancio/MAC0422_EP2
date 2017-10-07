@@ -10,6 +10,7 @@ typedef struct {
 	int faixa; //em qual faixa o ciclista está
 	int faixa_origem;
 	int pontos;
+	int quebrado;
 	int id; //Deve ser diferente de 0
 	pthread_t thread_id;
 } ciclista;
