@@ -32,8 +32,11 @@ int consegue_voltar(ciclista *c);
 //Recebe um ponteiro para um ciclista. Retorna 1 se o ciclista quebrou e 0 c.c.
 int sorteia_quebra(ciclista *c);
 
-//Recebe um ponteiro para um ciclista, sorteia sua velocidade e preenche a struct
-int sorteia_velocidade(ciclista *c);
+//Recebe um ponteiro para ciclista e sorteia sua velocidade baseado na velocidade da volta anterior
+void sorteia_velocidade(ciclista *c);
+
+//Escolhe um ciclista aleatório e sorteia, com 10% de chance, se a sua velocidade passará a ser 90km/h
+void sorteia_90();
 
 void *ciclista_generico(void *c);
 
